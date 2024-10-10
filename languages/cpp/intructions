@@ -1,0 +1,2 @@
+Use g++ sourceCode.cpp -o filename to compile
+Use ./filename to execute
