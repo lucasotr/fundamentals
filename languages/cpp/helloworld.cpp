@@ -20,6 +20,9 @@ int main(){
     char a = 'a';
     double amount = 2.0;
     bool haveFish = true;
+    
+    // Boolean doens't output value true, but no error  
+    cout << haveFish << endl;
 
     // Concatenation
     cout << answer << " thanks for " << a << amount << fish << endl;
