@@ -48,13 +48,24 @@ int main(){
     cout << sum << endl;
 
     // User input
-    int h;
-    cout << "Type a number: ";
-    cin >> h; // User input
-    cout << "Your number is: " << h << endl; // Display input
+    string h;
+    string i;
+    cout << "Type a hello: ";
+    cin >> h; // User input limited to 1 word without space
+    cout << "You typed: " << h << endl; // Display input
+    cin.ignore(); // cin buffer has to be emptied  
+    cout << "Type a phrase: ";
+    getline (cin, i); // User input many words with space
+    cout << "The phrase was: " << i << endl;
 
-
+    /* Strings are objects and have methods. Since it is
+    not a type primitive it has to be included */ 
     
+    h[0] = 'J'; //
+    cout << h << endl;
+    cout << "last typed letter is: " << h[h.length() - 1] << endl;
+
+
     return 0;
 }
 
