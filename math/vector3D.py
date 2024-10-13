@@ -9,16 +9,27 @@ class Vector3D:
     def magnitude(self):
         return sqrt(self.x ** 2 + self.y ** 2 + self.z ** 2)
 
-    # Check if correct or if V * (1/||V||) is correct
-    def normalize(self):
-        if self.x or self.y or self.z is not 0.0:
-            return 1 / self.magnitude()
+    def normalize(self) -> 'Vector3D':
+        magnitude = self.magnitude()
+        if magnitude == 0:
+            raise ValueError("Cannot normalize a zero vector")
+        else:
+            return Vector3D(self.x / magnitude,
+                            self.y / magnitude,
+                            self.z / magnitude)
     
-    # Find appropriate dunder method for sum 
-    # Q + P = (Qx + Px, Qy + Py, Qz + Pz)
+    def __add__(self, otherVector3D:'Vector3D'):
+        return Vector3D(self.x + otherVector3D.x,
+                        self.y + otherVector3D.y,
+                        self.z + otherVector3D.z)
 
-    # Find appropriate dunder method for subtraction
-    # Q - P = Q + (-P)
+    def __sub__(self, otherVector3D:'Vector3D'):
+        return Vector3D(self.x - otherVector3D.x,
+                        self.y - otherVector3D.y,
+                        self.z - otherVector3D.z)
 
     # Find appropriate dunder method for multiplication
     # a * V = (aVx, aVy, aVz), where a is a scalar
+
+    def __repr__(self) -> str:
+        return f"Vector3D {self.x}, {self.y}, {self.z}"
