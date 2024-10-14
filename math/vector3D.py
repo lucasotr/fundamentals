@@ -1,12 +1,13 @@
-from numpy import sqrt
+from math import acos
+from numpy import sqrt, clip
 
 class Vector3D:
-    def __init__(self, x:float, y:float, z:float) -> None:
+    def __init__(self, x:float=0, y:float=0, z:float=0) -> None:
         self.x = x
         self.y = y
         self.z = z
     
-    def magnitude(self):
+    def magnitude(self) -> float:
         return sqrt(self.x ** 2 + self.y ** 2 + self.z ** 2)
 
     def normalize(self) -> 'Vector3D':
@@ -17,7 +18,19 @@ class Vector3D:
             return Vector3D(self.x / magnitude,
                             self.y / magnitude,
                             self.z / magnitude)
-    
+        
+    def dotProduct(self, firstVector3D:'Vector3D', secondVector3D:'Vector3D') -> float:
+        return (firstVector3D.x * secondVector3D.x + 
+                firstVector3D.y * secondVector3D.y + 
+                firstVector3D.z * secondVector3D.z)
+
+    def angleBetweenTwoVertices(self, fVector:'Vector3D', sVector:'Vector3D'):
+        magnitudeA = fVector.magnitude() 
+        magnitudeB = sVector.magnitude() 
+        cosTheta = clip(self.dotProduct(fVector, sVector) / (magnitudeA * magnitudeB), -1, 1)
+        return acos(cosTheta)
+        
+
     def __add__(self, otherVector3D:'Vector3D'):
         return Vector3D(self.x + otherVector3D.x,
                         self.y + otherVector3D.y,
@@ -28,8 +41,34 @@ class Vector3D:
                         self.y - otherVector3D.y,
                         self.z - otherVector3D.z)
 
-    # Find appropriate dunder method for multiplication
     # a * V = (aVx, aVy, aVz), where a is a scalar
+    def __mul__(self, scalar:float|int) -> 'Vector3D':
+        if not isinstance(scalar, (int, float)):
+            raise TypeError('Scalar must be int or float')
+        else:
+            x = self.x * scalar
+            y = self.y * scalar
+            z = self.z * scalar
+            return Vector3D(x, y, z)
 
     def __repr__(self) -> str:
         return f"Vector3D {self.x}, {self.y}, {self.z}"
+
+# Case test
+
+A = Vector3D(3, 4, 0)
+B = Vector3D(1, 2, 2)
+
+C, D = Vector3D(), Vector3D()
+C = C.dotProduct(A, B)
+D = D.angleBetweenTwoVertices(A, B)
+
+print(f"A mag {A.magnitude()}")
+print(f"A norm {A.normalize()}")
+print(f"B mag {B.magnitude()}")
+print(f"B norm {B.normalize()}")
+print(f"Scalar {C}")
+print(f"Ang A&B {D}")
+
+F = A * 'n'
+print(F)
