@@ -29,7 +29,6 @@ class Vector3D:
         magnitudeB = sVector.magnitude() 
         cosTheta = clip(self.dotProduct(fVector, sVector) / (magnitudeA * magnitudeB), -1, 1)
         return acos(cosTheta)
-        
 
     def __add__(self, otherVector3D:'Vector3D'):
         return Vector3D(self.x + otherVector3D.x,
@@ -41,7 +40,6 @@ class Vector3D:
                         self.y - otherVector3D.y,
                         self.z - otherVector3D.z)
 
-    # a * V = (aVx, aVy, aVz), where a is a scalar
     def __mul__(self, scalar:float|int) -> 'Vector3D':
         if not isinstance(scalar, (int, float)):
             raise TypeError('Scalar must be int or float')
@@ -53,22 +51,3 @@ class Vector3D:
 
     def __repr__(self) -> str:
         return f"Vector3D {self.x}, {self.y}, {self.z}"
-
-# Case test
-
-A = Vector3D(3, 4, 0)
-B = Vector3D(1, 2, 2)
-
-C, D = Vector3D(), Vector3D()
-C = C.dotProduct(A, B)
-D = D.angleBetweenTwoVertices(A, B)
-
-print(f"A mag {A.magnitude()}")
-print(f"A norm {A.normalize()}")
-print(f"B mag {B.magnitude()}")
-print(f"B norm {B.normalize()}")
-print(f"Scalar {C}")
-print(f"Ang A&B {D}")
-
-F = A * 'n'
-print(F)
