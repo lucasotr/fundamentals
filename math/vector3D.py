@@ -12,39 +12,33 @@ class Vector3D:
     
     def sign(self, vector:"Vector3D") -> "Vector3D":
         signedVector = Vector3D()
-        if vector.x == 0:
-            signedVector.x = 0
-        else: 
+        if vector.x != 0:
             signedVector.x = vector.x / abs(vector.x)
-        if vector.y == 0:
-            signedVector.y = 0
-        else: 
+        if vector.y != 0:
             signedVector.y = vector.y / abs(vector.y)
-        if vector.z == 0:
-            signedVector.z = 0
-        else: 
+        if vector.z != 0:
             signedVector.z = vector.z / abs(vector.z)
         return signedVector
        
-    def distance(self, fromVector:"Vector3D", toVector:"Vector3D") -> "Vector3D":
+    def distance(self, fromVector:"Vector3D", toVector:"Vector3D") -> "float":
         diffToVectFromVect = toVector - fromVector
         return Vector3D().magnitude(diffToVectFromVect)
 
-    def normalize(self) -> 'Vector3D':
-        magnitude = self.magnitude()
+    def normalize(self, vector:"Vector3D") -> 'Vector3D':
+        magnitude = self.magnitude(vector)
         if magnitude == 0:
             raise ValueError("Cannot normalize a zero vector")
         else:
-            return Vector3D(self.x / magnitude,
-                            self.y / magnitude,
-                            self.z / magnitude)
+            return Vector3D(vector.x / magnitude,
+                            vector.y / magnitude,
+                            vector.z / magnitude)
         
     def dotProduct(self, firstVector3D:'Vector3D', secondVector3D:'Vector3D') -> float:
         return (firstVector3D.x * secondVector3D.x + 
                 firstVector3D.y * secondVector3D.y + 
                 firstVector3D.z * secondVector3D.z)
 
-    def angleBetweenTwoVectors(self, fVector:'Vector3D', sVector:'Vector3D'):
+    def angleBetweenTwoVectors(self, fVector:'Vector3D', sVector:'Vector3D') -> float:
         magnitudeA = fVector.magnitude() 
         magnitudeB = sVector.magnitude() 
         cosTheta = clip(self.dotProduct(fVector, sVector) / (magnitudeA * magnitudeB), -1, 1)
