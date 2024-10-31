@@ -10,112 +10,6 @@
 std:: prefix. Ex: std::cout */
 using namespace std;
 
-// class declaration
-class Student
-{
-    //private: m_ notation to denote
-    std::string m_firstName = "First";
-    std::string m_lastName  = "Last";
-    int         m_id        = 1;
-    float       m_avg       = 0;
-
-public:
-    // Default constructor
-    Student(){}
-    // Initializer list
-    Student(std::string first, std::string last, int id, float avg)
-    : m_firstName   (first)
-    , m_lastName    (last)
-    , m_id          (id)
-    , m_avg         (avg)
-    {
-    }
-
-    int getAvg()
-    {
-        return m_avg;
-    }
-
-    int getId()
-    {
-        return m_id;
-    }
-
-    std::string getFirst()
-    {
-        return m_firstName;
-    }
-
-    std::string getLast()
-    {
-        return m_lastName;
-    }
-    
-    /*  const correctness: any function that doesn´t change
-    make changes should have const to avoid errors */  
-    void print() const
-    {
-        std::cout << m_firstName << " " << m_lastName << " ";
-        std::cout << m_id << " " << m_avg << endl ;
-    }
-
-};
-
-class Course
-{
-    std::string m_name = "Course";
-    std::vector<Student> m_students;
-
-public:
-
-    Course(){}
-    // When using string you want to pass a const reference
-    // reference avoid copying the object
-    // const avoid changing the string
-    Course(const std::string& name)
-        : m_name(name)
-    {
-    }
-    void addStudent(const Student& s)
-    {
-        m_students.push_back(s);
-    }
-
-    // argument pass the fixed reference name 
-    void loadFromFile(const std::string& filename)
-    {
-        // initialize filestream
-        std::ifstream fin(filename);
-        // store temp
-        std::string temp;
-        // send every space separeted word to temp
-        // exit in the end
-        while(fin >> temp)
-        {
-            // send every word in temp out
-            std::cout << temp << "\n";
-        }
-
-    }
-
-    // First const implies that not altering the reference
-    //Second const implis function const correct
-    const std::vector<Student>& getStudents() const
-    {
-        return m_students;
-    }
-
-    void print() const
-    {
-        for (auto& s : m_students) 
-        {
-            s.print();
-        }
-    }
-
-};
-
-
 int main()
 {
     /* cout print to console 
@@ -254,20 +148,6 @@ for (auto a : vec)
 {
     std::cout << a << "\n";
 };
-
-// class definition
-
-Student s1;
-Student s2("Jane", "Doe", 50, 4.1);
-Student s3("John", "Doe", 99, 2.0);
-
-Course class4300("Comp4300");
-class4300.addStudent(s1);
-class4300.addStudent(s2);
-class4300.addStudent(s3);
-class4300.addStudent(Student("Lucas", "B", 1, 2.0));
-class4300.print();
-class4300.loadFromFile("student.txt");
 
 return 0;
 }
