@@ -6,6 +6,7 @@
 #include <vector>
 //filestream manipulate files 
 #include <fstream>
+
 /* This allows the use of standart library (std) without
 std:: prefix. Ex: std::cout */
 using namespace std;
@@ -29,15 +30,19 @@ int main()
     char a = 'a'; // single characters or ASCII in single quotes
     double amount = 2.0;
     bool haveFish = true; // true = 1, false = 0
+
     // variable assignment without value 
     int emptyVariable;
+
     // multiple variable assignment
     int b = 5, c = 6, d = 50;
-    cout << "b + c + d = " << b + c + d;
+    cout << "b + c + d = " << b + c + d << "\n";
+
     // assign one value to multiple variables
     int e, f, g;
     e = f = g = 50;
     cout << "Average of e, f and g = " << (e + f + g) / 3 << endl;
+    
     // const type constName = value. Value must be assigned.
     const double pi = 3.14; 
 

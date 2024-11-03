@@ -30,5 +30,4 @@ int main(int argc, char const *argv[])
     tennify(x);
     std::cout << x << "\n"  ; 
     
-    return 0;
 }

@@ -11,9 +11,9 @@ void PointerPrinter(int & i)
 
 int main(int argc, char const *argv[])
 {
-    // stack allocated primitive variables
-    
+    // stack allocated primitive variable    
     int a = 10;
+    // Unsafe pointer are dangerous
     // pointerA = type * variable adress | * Order is important
     int* pointerA = &a; 
     // * pointerA = value at pointerA address | * Order is important
@@ -28,11 +28,18 @@ int main(int argc, char const *argv[])
 
     //stack allocated array
     int array[10] = {};
-    int * HeapArray = new int[10];
-
     for (size_t i=0; i < 10; i++)
     {
         PointerPrinter(array[i]);
+    }
+
+    // Heap allocated array 
+    // Memory allocated far away
+    // Not garbage collected = memory leak
+    int * HeapArray = new int[10];
+    for (size_t i=0; i < 10; i++)
+    {
+        PointerPrinter(HeapArray[i]);
     }
 
     return 0;
